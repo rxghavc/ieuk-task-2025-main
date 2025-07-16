@@ -133,3 +133,13 @@ Potential bot/high-frequency IPs (over 100 requests):
 185.220.101.19: 1440 requests, 8 user agents, 304 unique paths
 185.220.101.78: 1440 requests, 8 user agents, 304 unique paths
 185.220.100.77: 1440 requests, 8 user agents, 304 unique paths
+
+
+-------------------------------------------------------------------
+
+I ran my unit test for the analyze_log.py file and here was the terminal output:
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+Which indicates the test has passed and the function works properly
