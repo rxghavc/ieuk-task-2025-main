@@ -10,4 +10,4 @@ To address the bot traffic and reduce downtime, the company should first impleme
 
 # Costs & Summary
 
-All recommended solutions are free or low-cost and require minimal engineering effort. Cloudflare’s free plan provides rate limiting and basic bot protection, while Nginx and Apache modules are open source. These steps will reduce downtime, protect resources, and allow the engineering team to focus on product development rather than firefighting bot traffic. The company should prioritize solutions that are easy to implement and maintain, given limited staff and budget.
+All recommended solutions are free or low-cost and require minimal engineering effort. Cloudflare’s free plan provides rate limiting and basic bot protection, while Nginx and Apache modules are open source. These steps will reduce downtime, protect resources, and allow the engineering team to focus on product development rather than firefighting bot traffic.
