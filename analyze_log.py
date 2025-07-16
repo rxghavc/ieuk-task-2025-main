@@ -66,3 +66,37 @@ def analyze_log(log_path):
             path_counter[path] += 1
             ip_to_useragents[ip].add(useragent)
             ip_to_paths[ip].add(path)
+
+    # Print top 10 IPs by request count, with user agent and path diversity
+    print("\nTop 10 IPs by request count:")
+    for ip, count in ip_counter.most_common(10):
+        print(f"{ip}: {count} requests, {len(ip_to_useragents[ip])} user agents, {len(ip_to_paths[ip])} unique paths")
+
+    # Print top 10 user agents by request count
+    print("\nTop 10 User Agents:")
+    for ua, count in useragent_counter.most_common(10):
+        print(f"{ua[:80]}...: {count} requests")
+
+    # Print top 10 requested paths
+    print("\nTop 10 Requested Paths:")
+    for path, count in path_counter.most_common(10):
+        print(f"{path}: {count} requests")
+
+    # Print IPs with more than 100 requests (potential bots/high-frequency)
+    print("\nPotential bot/high-frequency IPs (over 100 requests):")
+    for ip, count in ip_counter.items():
+        if count > 100:
+            print(f"{ip}: {count} requests, {len(ip_to_useragents[ip])} user agents, {len(ip_to_paths[ip])} unique paths")
+
+def main():
+    """
+    Entry point for the script. Checks command-line arguments and runs analysis.
+    """
+    if len(sys.argv) != 2:
+        print(f"Usage: python {sys.argv[0]} <logfile>")
+        sys.exit(1)
+    analyze_log(sys.argv[1])
+
+# Run main() if this script is executed directly
+if __name__ == "__main__":
+    main()
