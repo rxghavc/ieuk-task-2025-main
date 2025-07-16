@@ -20,3 +20,21 @@ from collections import Counter, defaultdict  # For counting and grouping data
 #   - A user agent string in quotes
 #   - A response time (e.g., 269)
 # Each part is separated by spaces or quotes, which informed the construction of the regular expression (LOG_PATTERN) to extract these fields for analysis.
+
+
+LOG_PATTERN = re.compile(
+    r'^(?P<ip>\S+) - (?P<country>\S+) - \[(?P<timestamp>[^\]]+)\] "(?P<method>\S+) (?P<path>\S+) (?P<httpver>\S+)" '
+    r'(?P<status>\d+) (?P<bytes>\d+) "-" "(?P<useragent>[^"]+)" (?P<responsetime>\d+)$'
+)
+# This regular expression matches each log line and extracts fields like IP, country, timestamp, HTTP method, path, status, bytes, user agent, and response time.
+
+def parse_log_line(line):
+    """
+    Parse a single log line using the LOG_PATTERN regex.
+    Returns a dictionary of extracted fields if the line matches, else None.
+    """
+    match = LOG_PATTERN.match(line)
+    if match:
+        return match.groupdict()
+    return None
+
