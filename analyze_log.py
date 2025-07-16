@@ -37,3 +37,32 @@ def parse_log_line(line):
     if match:
         return match.groupdict()
     return None
+
+def analyze_log(log_path):
+    """
+    Analyze the log file at log_path and print statistics about IPs, user agents, and paths.
+    Also flags potential bots/high-frequency IPs.
+    """
+
+    # Initialize counters and mappings to store analysis results
+    ip_counter = Counter()
+    useragent_counter = Counter()
+    path_counter = Counter()
+    ip_to_useragents = defaultdict(set)
+    ip_to_paths = defaultdict(set)
+
+    # Open the log file for reading
+    with open(log_path, 'r', encoding='utf-8', errors='ignore') as f:
+        for line in f:
+            parsed = parse_log_line(line.strip())  # Parse each line
+            if not parsed:
+                continue  # Skip lines that don't match the expected format
+            ip = parsed['ip']
+            useragent = parsed['useragent']
+            path = parsed['path']
+            # Update counters and mappings
+            ip_counter[ip] += 1
+            useragent_counter[useragent] += 1
+            path_counter[path] += 1
+            ip_to_useragents[ip].add(useragent)
+            ip_to_paths[ip].add(path)
