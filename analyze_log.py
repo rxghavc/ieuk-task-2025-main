@@ -37,4 +37,3 @@ def parse_log_line(line):
     if match:
         return match.groupdict()
     return None
-
