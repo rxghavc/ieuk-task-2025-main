@@ -1,0 +1,13 @@
+# Report for Engineering IEUK Project - Sai Raghavan Commandur
+
+## Findings
+
+Analysis of recent web logs reveals a surge in traffic, with a handful of IP addresses responsible for thousands of requests. For instance, IPs such as 45.133.1.1 and 45.133.1.2 each made over 5,000 requests, using multiple user agents and accessing hundreds of unique paths. Another, 35.185.0.156, made 3,600 requests with a single user agent and over 2,000 unique paths. These patterns strongly suggest automated, non-human (bot) activity. The most requested pages include /episodes/ep-42-synthesizer-history, /contact, and /about, each received over 15,000 requests. The top user agents are common browser strings, such as Mozilla/5.0 (Windows NT 10.0; Win64; x64) and Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7), which bots often use to mimic real users. This excessive activity has led to frequent server downtime, impacting productivity and risking user experience and revenue.
+
+## Recommendations
+
+To address the bot traffic and reduce downtime, the company should first implement rate limiting at the web server or application level. This restricts the number of requests per IP and can be set up using free tools like Nginx or Apache modules, or Cloudflare’s free tier. Next, block or challenge suspicious IPs identified in the analysis, such as 45.133.1.1, 45.133.1.2, and 35.185.0.156. These can be blocked or presented with CAPTCHAs using firewall rules, web application firewalls, or Cloudflare’s bot management features. Leveraging a CDN like Cloudflare or AWS CloudFront is also recommended, as these services offer basic bot management and rate limiting for free or at low cost, reducing server load and improving uptime. Cloudflare’s free plan is suitable for small businesses and easy to integrate. Finally, traffic should be monitored regularly by continuing log analysis to identify new bot patterns and adjust rules as needed. Automating reporting will minimize manual effort and allow the engineering team to focus on product development.
+
+# Costs & Summary
+
+All recommended solutions are free or low-cost and require minimal engineering effort. Cloudflare’s free plan provides rate limiting and basic bot protection, while Nginx and Apache modules are open source. These steps will reduce downtime, protect resources, and allow the engineering team to focus on product development rather than firefighting bot traffic. The company should prioritize solutions that are easy to implement and maintain, given limited staff and budget.
