@@ -57,6 +57,9 @@ Potential bot/high-frequency IPs (over 100 requests):
 185.220.101.78: 1440 requests, 8 user agents, 304 unique paths
 185.220.100.77: 1440 requests, 8 user agents, 304 unique paths
 
+Suspicious IPs flagged by bot heuristics:
+[HEURISTIC] 35.185.0.156: 3600 requests, 1 user agents, 2280 unique paths
+
 -------------------------------------------------------------------
 
 I ran my unit test for the analyze_log.py file and here was the terminal output:

@@ -88,6 +88,25 @@ def analyze_log(log_path):
         if count > 100:
             print(f"{ip}: {count} requests, {len(ip_to_useragents[ip])} user agents, {len(ip_to_paths[ip])} unique paths")
 
+    # Bot Detection Statistics
+    # This section applies simple heuristics to flag suspicious IPs:
+    #   - IPs with high request counts and low diversity in user agents or paths
+    #   - IPs using known bot user agent strings
+    print("\nSuspicious IPs flagged by bot heuristics:")
+    known_bots = [
+        "Googlebot", "Bingbot", "Slurp", "DuckDuckBot", "Baiduspider", "YandexBot", "Sogou", "Exabot", "facebot", "ia_archiver"
+    ]
+    for ip, count in ip_counter.items():
+        ua_diversity = len(ip_to_useragents[ip])  # Number of unique user agents for this IP
+        path_diversity = len(ip_to_paths[ip])     # Number of unique paths requested by this IP
+        # Heuristic: flag IPs with high requests and low diversity
+        if count > 100 and (ua_diversity <= 2 or path_diversity <= 2):
+            print(f"[HEURISTIC] {ip}: {count} requests, {ua_diversity} user agents, {path_diversity} unique paths")
+        # Heuristic: flag IPs using known bot user agents
+        for ua in ip_to_useragents[ip]:
+            if any(bot in ua for bot in known_bots):
+                print(f"[KNOWN BOT] {ip}: User agent '{ua[:80]}...'")
+
 def main():
     """
     Entry point for the script. Checks command-line arguments and runs analysis.
